@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:ui_testing/misc/constant.dart';
 
 import 'package:ui_testing/multiple_screen/screen1.dart';
 import 'package:ui_testing/multiple_screen/screen2.dart';
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        scaffoldBackgroundColor: lPrimaryColor,
         appBarTheme: AppBarTheme(
           brightness: Theme.of(context).brightness,
         ),
@@ -31,6 +34,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // pageview
   static int _selectedIndex = 0;
   PageController pageViewController = PageController(
     initialPage: 0,
@@ -38,11 +42,17 @@ class _HomeState extends State<Home> {
   );
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     pageViewController.dispose();
   }
 
+  // pageView method
   void pageChanged(int index) {
     setState(() {
       _selectedIndex = index;
@@ -80,10 +90,11 @@ class _HomeState extends State<Home> {
         bottomNavigationBar: BottomNavigationBar(
           elevation: 0.0,
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.black,
+          selectedItemColor: Colors.blueAccent,
           onTap: (index) {
             bottomTapped(index);
           },
+          // backgroundColor: lSecondaryColor, // flat color
           backgroundColor: Color(0x00ffffff), // transparent
           type: BottomNavigationBarType.fixed,
           unselectedItemColor: Colors.white,
